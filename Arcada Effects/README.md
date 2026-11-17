@@ -403,6 +403,16 @@ blend, непрозрачность, послойное свечение, рад
 и в эффект НЕ записываются.
 Загрузка в Phaser: `this.load.spritesheet('fx', 'fx.png', { frameWidth: W, frameHeight: H })`.
 
+### Эффекты в Unity (без атласа)
+Эффект можно проигрывать в Unity «вживую» — тем же движком, без покадрового атласа:
+модуль **ArcadiaEffectsUnityModule** (https://github.com/AndreiUsoltsev/ArcadiaEffectsUnityModule.git).
+1. Сохранить эффект (или кнопка **Export** в каталоге — `.json` с текстурами внутри).
+2. В Unity: пакет из git URL выше, затем **Assets → Arcadia Effects → Import from Arcaidia
+   library…** и выбрать `library/<Имя>.json` — он станет ассетом `.afx`.
+3. **GameObject → Effects → Arcadia Effect**, назначить ассет.
+Текстуры для Unity — PNG/JPG (WebP Unity не читает). Импорт эффекта обратно в редактор —
+кнопка **Import** в каталоге или перетащить `.json` в окно.
+
 ## Горячие клавиши
 
 | Клавиша | Действие |

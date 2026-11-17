@@ -19,6 +19,7 @@
 | Симуляция, рендер, спрайты, треки/ключи, кривые, атлас, формат документа | `skills/afx-core-engine/SKILL.md` |
 | Панели UI, виджеты, инспектор, таймлайн, график, превью, драги | `skills/afx-ui-panels-timeline/SKILL.md` |
 | Рабочая сессия (workspace), каталог, сервер, локализация, тестирование | `skills/afx-workspace-catalog-i18n/SKILL.md` |
+| **Эффект для Unity**: экспорт/импорт, модуль ArcadiaEffectsUnityModule, что дорого на мобильных и в вебе; **любая правка `js/core` (sim/engine/model/utils/track/curve/path/sprites)** | `skills/afx-unity-module/SKILL.md` |
 
 Справочники: `docs/ARCHITECTURE.md` (карта модулей, событийная шина, потоки данных),
 `docs/FORMAT.md` (схема JSON эффекта, форматы треков, ключи localStorage).
@@ -62,6 +63,20 @@
    `beginInteract()` / `endInteract()`, иначе ребилд DOM срывает драг.
 7. **Код игры не трогать** — редактор ничего не импортирует из ARCADIA и наоборот;
    правки только внутри этой папки.
+8. **Движок и формат — контракт Unity-модуля.** Эффекты играются в Unity портом этого
+   движка на C# (https://github.com/AndreiUsoltsev/ArcadiaEffectsUnityModule.git). Правка,
+   меняющая симуляцию, рендер или формат JSON, без такой же правки в модуле = эффект в игре
+   выглядит иначе, чем в редакторе. Порядок действий и проверка паритета —
+   `skills/afx-unity-module/SKILL.md`.
+
+## Эффекты в Unity
+
+Экспорт — тот же файл эффекта: `library/<Имя>.json` или кнопка **Export** в каталоге
+(JSON с текстурами внутри). Импорт в редактор — кнопка **Import** / drag&drop `.json` в окно.
+В Unity файл импортируется модулем ArcadiaEffectsUnityModule как `.afx`
+(**Assets → Arcadia Effects → Import from Arcaidia library…**) и проигрывается компонентом
+`ArcadiaEffect` без атласа. Текстуры для Unity — только PNG/JPG (WebP Unity не читает).
+Детали, цена механизмов на мобильных/вебе, синхронизация движка — `skills/afx-unity-module/SKILL.md`.
 
 ## Карта файлов
 
@@ -100,6 +115,6 @@ tools/simhash.mjs   хэш состояния симуляции: регресс
 tools/devsnap.js    снимки рендера из вкладки в .snap/ (визуальная проверка без экрана)
 library/            сохранённые эффекты пользователя (существующие не трогать;
                     новые эффекты добавлять НОВЫМИ файлами — см. скилл авторинга)
-skills/             скиллы Claude (правила подсистем + авторинг эффектов)
+skills/             скиллы Claude (правила подсистем + авторинг эффектов + Unity-модуль)
 docs/               архитектура и формат данных
 ```

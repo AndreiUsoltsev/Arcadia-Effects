@@ -68,10 +68,18 @@ Effects are stored as readable JSON rather than a proprietary binary format.
 
 Textures can be embedded directly into the effect file, making effects portable between installations.
 
+Effects can also be played **live in Unity**, without an atlas, by
+[ArcadiaEffectsUnityModule](https://github.com/AndreiUsoltsev/ArcadiaEffectsUnityModule) —
+a C# port of this engine (same deterministic simulation and Canvas2D-style rendering,
+WebGL 2 and mobile quality tiers). Export the effect JSON (or take `library/<Name>.json`),
+then in Unity: **Assets → Arcadia Effects → Import from Arcaidia library…** and add an
+**Arcadia Effect** component. Use PNG/JPG textures: Unity cannot decode WebP.
+
 For coding agents:
 
 - [`CLAUDE.md`](CLAUDE.md) - agent workflow and project rules
 - [`skills/`](skills/) - subsystem-specific LLM instructions
+  (`skills/afx-unity-module` — Unity export/import and keeping the engine in sync with the Unity module)
 - [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md) - architecture
 - [`docs/FORMAT.md`](docs/FORMAT.md) - effect data format
 

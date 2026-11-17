@@ -5,6 +5,11 @@ description: Ядро Arcaidia Effector — детерминированная �
 
 # AFX Ядро: симуляция, рендер, данные
 
+> **Unity-модуль.** `js/core` портирован на C# в ArcadiaEffectsUnityModule
+> (https://github.com/AndreiUsoltsev/ArcadiaEffectsUnityModule.git). Любая правка
+> симуляции, рендера или формата повторяется в модуле и проверяется паритетом —
+> `skills/afx-unity-module/SKILL.md`.
+
 ## Детерминизм (главный инвариант)
 
 - Симуляция идёт фиксированным шагом `DT = 1/120` (sim.js) от t=0 слоя. Перемотка
